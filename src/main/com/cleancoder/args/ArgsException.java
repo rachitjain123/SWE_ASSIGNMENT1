@@ -4,14 +4,26 @@ public class ArgsException extends Exception {
     private char errorArgumentId = '\0';
     private String errorParameter = null;
     private ErrorCode errorCode = ErrorCode.OK;
-    ArgsException(ErrorCode invalidArgumentFormat, char elementId, String message) {super(message);}
-    ArgsException(ErrorCode errorCode) {
+
+    public ArgsException() {}
+
+    public ArgsException(String message) {super(message);}
+
+    public ArgsException(ErrorCode errorCode) {
         this.errorCode = errorCode;
     }
-    ArgsException(ErrorCode errorCode, char errorArgumentId) {
+
+    public ArgsException(ErrorCode errorCode, String errorParameter) {
         this.errorCode = errorCode;
+        this.errorParameter = errorParameter;
+    }
+
+    public ArgsException(ErrorCode errorCode, char errorArgumentId, String errorParameter) {
+        this.errorCode = errorCode;
+        this.errorParameter = errorParameter;
         this.errorArgumentId = errorArgumentId;
     }
+
     public char getErrorArgumentId() {
         return errorArgumentId;
     }

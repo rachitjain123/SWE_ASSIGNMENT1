@@ -7,6 +7,10 @@ public class Args {
     private Set<Character> argsFound;
     private ListIterator<String> currentArgument;
 
+
+    static {
+
+    }
     public Args(String schema, String[] args) throws ArgsException {
         marshalers = new HashMap<>();
         argsFound = new HashSet<>();
@@ -45,7 +49,7 @@ public class Args {
 
     private void validateSchemaElementId(char elementId) throws ArgsException {
         if (!Character.isLetter(elementId))
-            throw new ArgsException(ErrorCode.INVALID_ARGUMENT_NAME, elementId);
+            throw new ArgsException(ErrorCode.INVALID_ARGUMENT_NAME, elementId,null);
     }
 
     private void parseArgumentStrings(List<String> argsList) throws ArgsException {
@@ -69,7 +73,7 @@ public class Args {
     private void parseArgumentCharacter(char argChar) throws ArgsException {
         ArgumentMarshaler m = marshalers.get(argChar);
         if (m == null) {
-            throw new ArgsException(ErrorCode.UNEXPECTED_ARGUMENT, argChar);
+            throw new ArgsException(ErrorCode.UNEXPECTED_ARGUMENT, argChar,null);
         } else {
             argsFound.add(argChar);
             m.set(currentArgument);
@@ -85,28 +89,50 @@ public class Args {
         return currentArgument.nextIndex();
     }
 
-    public boolean getBoolean(char arg) {
-        return BooleanArgumentMarshaler.getValue(marshalers.get(arg));
+
+    public <S, T extends ArgumentMarshaler<S>> S process(Class<S> type, Class<T> marshalerClass, char arg) {
+        ArgumentMarshaler m = marshalers.get(arg);
+
+        if (m != null) {
+            try {
+                marshalerClass.cast(m);
+                return marshalerClass.cast(m).getValue();
+            }
+            catch (ClassCastException e) { }
+        }
+
+        try {
+            return marshalerClass.newInstance().getDefaultValue();
+        }
+        catch (InstantiationException e1) {}
+        catch (IllegalAccessException e1) {}
+        return null;
     }
 
+    public boolean getBoolean(char arg) {
+        return process(Boolean.class, BooleanArgumentMarshaler.class, arg);
+    }
+
+
     public String getString(char arg) {
-        return StringArgumentMarshaler.getValue(marshalers.get(arg));
+        return process(String.class, StringArgumentMarshaler.class, arg);
     }
 
     public int getInt(char arg) {
-        return IntegerArgumentMarshaler.getValue(marshalers.get(arg));
+        return process(Integer.class, IntegerArgumentMarshaler.class, arg);
     }
 
     public double getDouble(char arg) {
-        return DoubleArgumentMarshaler.getValue(marshalers.get(arg));
+        return process(Double.class, DoubleArgumentMarshaler.class, arg);
     }
 
     public String[] getStringArray(char arg) {
-        return StringArrayArgumentMarshaler.getValue(marshalers.get(arg));
+        return process(String[].class, StringArrayArgumentMarshaler.class, arg);
     }
 
     public Map<String, String> getMap(char arg) {
-        return MapArgumentMarshaler.getValue(marshalers.get(arg));
+        return process(Map.class, MapArgumentMarshaler.class, arg);
     }
-
+    
+    
 }

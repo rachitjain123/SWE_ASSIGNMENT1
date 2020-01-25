@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class MapArgumentMarshaler implements ArgumentMarshaler {
+public class MapArgumentMarshaler extends AbstractArgumentMarshaler<Map> {
     private Map<String, String> map = new HashMap<>();
+    private String parameter;
 
     @Override
     public void set(Iterator<String> cuurentArgument) throws ArgsException {
@@ -15,19 +16,20 @@ public class MapArgumentMarshaler implements ArgumentMarshaler {
             for (String entry : mapEntries) {
                 String[] entryComponents = entry.split(":");
                 if (entryComponents.length != 2)
-                    throw new ArgsException(ErrorCode.MALFORMED_MAP);
+                    throw new ArgsException(ErrorCode.MALFORMED_MAP, parameter);
                 map.put(entryComponents[0], entryComponents[1]);
             }
         }
         catch (NoSuchElementException e){
-            throw new ArgsException(ErrorCode.MISSING_MAP);
+            throw new ArgsException(ErrorCode.MISSING_MAP, parameter);
         }
+    }
+    public Map<String, String> getValue(){
+        return map;
     }
 
-    static Map<String, String> getValue(ArgumentMarshaler am) {
-        if(am instanceof MapArgumentMarshaler) {
-            return ((MapArgumentMarshaler) am).map;
-        }
+    public Map<String,String> getDefaultValue(){
         return new HashMap<>();
     }
+
 }

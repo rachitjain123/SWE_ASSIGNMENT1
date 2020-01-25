@@ -3,7 +3,7 @@ package main.com.cleancoder.args;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class StringArgumentMarshaler implements ArgumentMarshaler {
+public class StringArgumentMarshaler extends AbstractArgumentMarshaler<String> {
     private String stringValue;
 
     @Override
@@ -15,11 +15,12 @@ public class StringArgumentMarshaler implements ArgumentMarshaler {
             throw new ArgsException(ErrorCode.MISSING_STRING);
         }
     }
+    public String getValue(){
+        return stringValue;
+    }
 
-    public static String getValue(ArgumentMarshaler am) {
-        if(am instanceof StringArgumentMarshaler) {
-            return ((StringArgumentMarshaler) am).stringValue;
-        }
+    public String getDefaultValue() {
         return "";
     }
+
 }

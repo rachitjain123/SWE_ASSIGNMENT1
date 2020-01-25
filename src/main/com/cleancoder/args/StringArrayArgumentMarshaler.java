@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class StringArrayArgumentMarshaler implements ArgumentMarshaler {
+public class StringArrayArgumentMarshaler extends AbstractArgumentMarshaler<String[]> {
     private List<String> strings = new ArrayList<>();
 
     @Override
@@ -18,10 +18,11 @@ public class StringArrayArgumentMarshaler implements ArgumentMarshaler {
         }
     }
 
-    public static String[] getValue(ArgumentMarshaler am) {
-        if(am instanceof StringArrayArgumentMarshaler) {
-            return ((StringArrayArgumentMarshaler) am).strings.toArray(new String[0]);
-        }
+    public String[] getValue(){
+       return  strings.toArray(new String[0]);
+    }
+
+    public String[] getDefaultValue() {
         return new String[0];
     }
 }
