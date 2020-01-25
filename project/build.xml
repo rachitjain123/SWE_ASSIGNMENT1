@@ -13,15 +13,4 @@
         <jar destfile="build/jar/args.jar" basedir="build/classes">
         </jar>
     </target>
-
-    <target name="test-compile">
-        <mkdir dir="build/test-classes" />
-        <javac srcdir="test" destdir="build/test-classes">
-            <classpath>
-                <pathelement path="build/classes"/>
-                <pathelement path="lib/junit.jar"/>
-            </classpath>
-        </javac>
-    </target>
-
 </project>
