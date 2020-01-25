@@ -3,5 +3,6 @@
 build
 out
 project*
+/target/*
 .DS_Store
 
