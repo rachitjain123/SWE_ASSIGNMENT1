@@ -16,19 +16,20 @@ public class Args {
 
 
     public Args(String schema, String[] args) throws ArgsException {
-        SchemaArgumentParser parser = new SchemaArgumentParser();
-        parser.parseSchema(schema);
 
         /* Converting argList to ImmutableList */
         ImmutableList<String> argList = ImmutableList.<String>builder()
                 .addAll(Arrays.asList(args))
                 .build();
 
-        parser.parseArgumentStringArray(argList);
+        SchemaParser schemaParser = new SchemaParser();
+        schemaParser.parseSchema(schema);
+        marshaller = schemaParser.getMarshaller();
 
-        currentArgument = parser.getCurrentArgument();
-        marshaller = parser.getMarshaller();
-        argsFound = parser.getArgsFound();
+        ArgumentParser argumentParser = new ArgumentParser(marshaller);
+        argumentParser.parseArgumentStringArray(argList);
+        currentArgument = argumentParser.getCurrentArgument();
+        argsFound = argumentParser.getArgsFound();
 
     }
 
