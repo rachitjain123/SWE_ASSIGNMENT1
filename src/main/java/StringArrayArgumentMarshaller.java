@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class StringArrayArgumentMarshaller extends AbstractArgumentMarshaller<String[]> {
-    private List<String> strings = new ArrayList<>();
+    private List<String> stringArrayList = new ArrayList<>();
 
     public void set(Iterator<String> currentArgument) throws ArgsException {
         try{
-            strings.add(currentArgument.next());
+            stringArrayList.add(currentArgument.next());
         }
         catch (NoSuchElementException e){
             throw new ArgsException(ErrorCode.MISSING_STRING);
@@ -16,9 +16,12 @@ public class StringArrayArgumentMarshaller extends AbstractArgumentMarshaller<St
     }
 
     public String[] getValue(){
-        return  strings.toArray(new String[0]);
+        return  stringArrayList.toArray(new String[0]);
     }
 
+    /**
+     * @return default value if StringArrayArgumentMarshaller does not contain the element id
+     */
     public String[] getDefaultValue() {
         return new String[0];
     }

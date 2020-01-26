@@ -1,7 +1,7 @@
-import java.util.Arrays;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
+
+import com.google.common.collect.ImmutableList;
 
 public class Args {
 
@@ -16,9 +16,15 @@ public class Args {
 
 
     public Args(String schema, String[] args) throws ArgsException {
-        SchemaParsing parser = new SchemaParsing();
+        SchemaArgumentParser parser = new SchemaArgumentParser();
         parser.parseSchema(schema);
-        parser.parseArgumentStrings(Arrays.asList(args));
+
+        /* Converting argList to ImmutableList */
+        ImmutableList<String> argList = ImmutableList.<String>builder()
+                .addAll(Arrays.asList(args))
+                .build();
+
+        parser.parseArgumentStringArray(argList);
 
         currentArgument = parser.getCurrentArgument();
         marshaller = parser.getMarshaller();

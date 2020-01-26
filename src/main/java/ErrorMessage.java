@@ -17,7 +17,7 @@ class ErrorMessage {
     /**
      * @return errorCodeMessageMap, map of error code and the respective messages
      * with argument id and errorParameter
-     * A More scalable approach
+     * More scalable approach
      */
     Map<ErrorCode, String> getErrorMessages() {
 

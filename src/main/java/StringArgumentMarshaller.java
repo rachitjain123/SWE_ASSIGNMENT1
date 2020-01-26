@@ -5,9 +5,9 @@ import java.util.NoSuchElementException;
 public class StringArgumentMarshaller extends AbstractArgumentMarshaller<String> {
     private String stringValue;
 
-    public void set(Iterator<String> cuurentArgument) throws ArgsException {
+    public void set(Iterator<String> currentArgument) throws ArgsException {
         try {
-            stringValue = cuurentArgument.next();
+            stringValue = currentArgument.next();
         }
         catch (NoSuchElementException e){
             throw new ArgsException(ErrorCode.MISSING_STRING);
@@ -17,6 +17,9 @@ public class StringArgumentMarshaller extends AbstractArgumentMarshaller<String>
         return stringValue;
     }
 
+    /**
+     * @return default value if StringArgumentMarshaller does not contain the element id
+     */
     public String getDefaultValue() {
         return "";
     }
