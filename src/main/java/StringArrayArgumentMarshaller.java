@@ -7,16 +7,15 @@ public class StringArrayArgumentMarshaller extends AbstractArgumentMarshaller<St
     private List<String> stringArrayList = new ArrayList<>();
 
     public void set(Iterator<String> currentArgument) throws ArgsException {
-        try{
+        try {
             stringArrayList.add(currentArgument.next());
-        }
-        catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ArgsException(ErrorCode.MISSING_STRING);
         }
     }
 
-    public String[] getValue(){
-        return  stringArrayList.toArray(new String[0]);
+    public String[] getValue() {
+        return stringArrayList.toArray(new String[0]);
     }
 
     /**

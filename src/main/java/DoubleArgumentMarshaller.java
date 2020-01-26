@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 public class DoubleArgumentMarshaller extends AbstractArgumentMarshaller<Double> {
     private double doubleValue;
 
-    DoubleArgumentMarshaller(){
+    DoubleArgumentMarshaller() {
         doubleValue = 0.0;
     }
 
@@ -14,13 +14,12 @@ public class DoubleArgumentMarshaller extends AbstractArgumentMarshaller<Double>
     @Override
     public void set(Iterator<String> currentArgument) throws ArgsException {
         String parameter = null;
-        try{
+        try {
             parameter = currentArgument.next();
             doubleValue = Double.parseDouble(parameter);
         } catch (NoSuchElementException e) {
             throw new ArgsException(ErrorCode.MISSING_DOUBLE, parameter);
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new ArgsException(ErrorCode.INVALID_DOUBLE, parameter);
         }
     }

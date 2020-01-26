@@ -1,4 +1,3 @@
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -8,12 +7,12 @@ public class StringArgumentMarshaller extends AbstractArgumentMarshaller<String>
     public void set(Iterator<String> currentArgument) throws ArgsException {
         try {
             stringValue = currentArgument.next();
-        }
-        catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ArgsException(ErrorCode.MISSING_STRING);
         }
     }
-    public String getValue(){
+
+    public String getValue() {
         return stringValue;
     }
 

@@ -13,8 +13,7 @@ public class MapArgumentMarshaller extends AbstractArgumentMarshaller<Map> {
                 String[] entryComponents = validateEntry(entry);
                 map.put(entryComponents[0], entryComponents[1]);
             }
-        }
-        catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ArgsException(ErrorCode.MISSING_MAP);
         }
     }
@@ -31,14 +30,14 @@ public class MapArgumentMarshaller extends AbstractArgumentMarshaller<Map> {
         return entryComponents;
     }
 
-    public Map<String, String> getValue(){
+    public Map<String, String> getValue() {
         return map;
     }
 
     /**
      * @return default value if MapArgumentMarshaller does not contain the element id
      */
-    public Map<String,String> getDefaultValue(){
+    public Map<String, String> getDefaultValue() {
         return new HashMap<>();
     }
 

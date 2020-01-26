@@ -9,9 +9,9 @@ class ErrorMessage {
     private char errorArgumentId;
     private String errorParameter;
 
-    ErrorMessage(char errorArgumentId, String errorParameter){
+    ErrorMessage(char errorArgumentId, String errorParameter) {
         this.errorArgumentId = errorArgumentId;
-        this. errorParameter = errorParameter;
+        this.errorParameter = errorParameter;
     }
 
     /**

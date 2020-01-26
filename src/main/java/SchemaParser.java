@@ -16,6 +16,7 @@ class SchemaParser {
         if (!Character.isLetter(elementId))
             throw new ArgsException(ErrorCode.INVALID_ARGUMENT_NAME, elementId, null);
     }
+
     private void parseSchemaElement(String element) throws ArgsException {
         SupportedArguments supportedArguments = new SupportedArguments();
         Map<String, AbstractArgumentMarshaller> allSupportedArguments = supportedArguments.getSupportedArguments();
@@ -29,6 +30,7 @@ class SchemaParser {
         else
             throw new ArgsException(ErrorCode.INVALID_ARGUMENT_FORMAT, elementId, elementTail);
     }
+
     void parseSchema(String schema) throws ArgsException {
         for (String element : schema.split(",")) {
             if (!element.isEmpty()) {

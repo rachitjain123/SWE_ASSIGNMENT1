@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 import com.google.common.collect.ImmutableList;
@@ -10,10 +9,8 @@ public class Args {
     private Map<Character, ArgumentMarshaller> marshaller;
     private Set<Character> argsFound;
 
-
     public Args() {
     }
-
 
     public Args(String schema, String[] args) throws ArgsException {
 
@@ -33,7 +30,7 @@ public class Args {
 
     }
 
-    boolean hasArgument(char arg){
+    boolean hasArgument(char arg) {
         return argsFound.contains(arg);
     }
 
@@ -45,7 +42,6 @@ public class Args {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(BooleanArgumentMarshaller.class, arg);
     }
-
 
     String getString(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);

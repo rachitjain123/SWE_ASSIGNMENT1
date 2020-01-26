@@ -6,7 +6,7 @@ class ArgumentParser {
     private ListIterator<String> currentArgument;
     private Map<Character, ArgumentMarshaller> marshaller;
 
-    ArgumentParser(Map<Character, ArgumentMarshaller> marshaller){
+    ArgumentParser(Map<Character, ArgumentMarshaller> marshaller) {
         this.marshaller = marshaller;
         argsFound = new HashSet<>();
 
@@ -21,10 +21,12 @@ class ArgumentParser {
             argumentMarshaller.set(currentArgument);
         }
     }
+
     private void parseArgumentString(String argChars) throws ArgsException {
         for (int i = 0; i < argChars.length(); i++)
             parseArgumentCharacter(argChars.charAt(i));
     }
+
     void parseArgumentStringArray(List<String> argsList) throws ArgsException {
         currentArgument = argsList.listIterator();
         while (currentArgument.hasNext()) {
@@ -38,8 +40,12 @@ class ArgumentParser {
         }
     }
 
-    ListIterator<String> getCurrentArgument() { return currentArgument; }
+    ListIterator<String> getCurrentArgument() {
+        return currentArgument;
+    }
 
-    Set<Character> getArgsFound() { return argsFound; }
+    Set<Character> getArgsFound() {
+        return argsFound;
+    }
 
 }

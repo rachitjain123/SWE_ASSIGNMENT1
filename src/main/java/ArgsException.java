@@ -5,9 +5,12 @@ public class ArgsException extends Exception {
     private String errorParameter = null;
     private ErrorCode errorCode = ErrorCode.OK;
 
-    public ArgsException() {}
+    public ArgsException() {
+    }
 
-    public ArgsException(String message) {super(message);}
+    public ArgsException(String message) {
+        super(message);
+    }
 
     public ArgsException(ErrorCode errorCode) {
         this.errorCode = errorCode;
@@ -43,7 +46,7 @@ public class ArgsException extends Exception {
         ErrorMessage errorMessage = new ErrorMessage(errorArgumentId, errorParameter);
         Map<ErrorCode, String> errorCodeMessageMap = errorMessage.getErrorMessages();
 
-        if(!errorCodeMessageMap.containsKey(errorCode))
+        if (!errorCodeMessageMap.containsKey(errorCode))
             throw new IllegalStateException("Unexpected value: " + errorCode);
         return errorCodeMessageMap.get(errorCode);
 
