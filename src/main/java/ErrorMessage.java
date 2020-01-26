@@ -25,6 +25,9 @@ class ErrorMessage {
         errorCodeMessageMap.put(ErrorCode.OK, "TILT: Should not get here.");
         errorCodeMessageMap.put(ErrorCode.UNEXPECTED_ARGUMENT, String.format("Argument -%c unexpected.", errorArgumentId));
         errorCodeMessageMap.put(ErrorCode.MISSING_STRING, String.format("Could not find string parameter for -%c.", errorArgumentId));
+        errorCodeMessageMap.put(ErrorCode.ILLEGAL_ACCESS, String.format("Trying to illegally get access of a class for -%c.", errorArgumentId));
+        errorCodeMessageMap.put(ErrorCode.INVALID_CAST, String.format("Invalid casting of a class to another class for -%c.", errorArgumentId));
+        errorCodeMessageMap.put(ErrorCode.INVALID_INSTANTIATION, String.format("Invalid instantiation of a class for -%c.", errorArgumentId));
         errorCodeMessageMap.put(ErrorCode.INVALID_INTEGER, String.format("Argument -%c expects an integer but was '%s'.", errorArgumentId, errorParameter));
         errorCodeMessageMap.put(ErrorCode.MISSING_INTEGER, String.format("Could not find integer parameter for -%c.", errorArgumentId));
         errorCodeMessageMap.put(ErrorCode.INVALID_DOUBLE, String.format("Argument -%c expects a double but was '%s'.", errorArgumentId, errorParameter));

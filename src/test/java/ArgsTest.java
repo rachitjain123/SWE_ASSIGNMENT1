@@ -1,9 +1,6 @@
 
-
 import org.junit.Test;
-
 import java.util.Map;
-
 import static org.junit.Assert.*;
 
 public class ArgsTest {
@@ -63,7 +60,7 @@ public class ArgsTest {
     @Test
     public void testSimpleBooleanPresent() throws Exception {
         Args args = new Args("x", new String[]{"-x"});
-        assertEquals(true, args.getBoolean('x'));
+        assertTrue(args.getBoolean('x'));
         assertEquals(1, args.nextArgument());
     }
 

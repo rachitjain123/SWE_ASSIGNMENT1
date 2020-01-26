@@ -34,33 +34,33 @@ public class Args {
         return currentArgument.nextIndex();
     }
 
-    boolean getBoolean(char arg) {
+    boolean getBoolean(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(BooleanArgumentMarshaller.class, arg);
     }
 
 
-    String getString(char arg) {
+    String getString(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(StringArgumentMarshaller.class, arg);
     }
 
-    int getInt(char arg) {
+    int getInt(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(IntegerArgumentMarshaller.class, arg);
     }
 
-    double getDouble(char arg) {
+    double getDouble(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(DoubleArgumentMarshaller.class, arg);
     }
 
-    String[] getStringArray(char arg) {
+    String[] getStringArray(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(StringArrayArgumentMarshaller.class, arg);
     }
 
-    Map getMap(char arg) {
+    Map getMap(char arg) throws ArgsException {
         ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
         return processArg.process(MapArgumentMarshaller.class, arg);
     }
