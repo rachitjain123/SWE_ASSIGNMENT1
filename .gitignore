@@ -1,3 +1,4 @@
+.DS_Store
 /.metadata/
 .idea
 build
@@ -5,4 +6,3 @@ out
 project*
 /target/*
 
-.DS_Store

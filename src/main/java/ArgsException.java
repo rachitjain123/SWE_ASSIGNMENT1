@@ -25,15 +25,15 @@ public class ArgsException extends Exception {
         this.errorArgumentId = errorArgumentId;
     }
 
-    public char getErrorArgumentId() {
+    char getErrorArgumentId() {
         return errorArgumentId;
     }
 
-    public String getErrorParameter() {
+    String getErrorParameter() {
         return errorParameter;
     }
 
-    public ErrorCode getErrorCode() {
+    ErrorCode getErrorCode() {
         return errorCode;
     }
 
@@ -54,7 +54,7 @@ public class ArgsException extends Exception {
         return codeStringMap;
     }
 
-    public String errorMessage() {
+    String errorMessage() {
         Map<ErrorCode, String> codeStringMap = getErrorMessages();
         if(!codeStringMap.containsKey(errorCode))
             throw new IllegalStateException("Unexpected value: " + errorCode);

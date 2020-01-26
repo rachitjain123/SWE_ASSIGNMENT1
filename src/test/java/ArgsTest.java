@@ -186,7 +186,7 @@ public class ArgsTest {
     public void MapArgument() throws Exception {
         Args args = new Args("f&", new String[] {"-f", "key1:val1,key2:val2"});
         assertTrue(args.has('f'));
-        Map<String, String> map = args.getMap('f');
+        Map map = args.getMap('f');
         assertEquals("val1", map.get("key1"));
         assertEquals("val2", map.get("key2"));
     }
@@ -200,7 +200,7 @@ public class ArgsTest {
     public void oneMapArgument() throws Exception {
         Args args = new Args("f&", new String[] {"-f", "key1:val1"});
         assertTrue(args.has('f'));
-        Map<String, String> map = args.getMap('f');
+        Map map = args.getMap('f');
         assertEquals("val1", map.get("key1"));
     }
 

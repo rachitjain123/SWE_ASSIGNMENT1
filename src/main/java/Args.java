@@ -6,6 +6,12 @@ public class Args {
     private Set<Character> argsFound;
     private ListIterator<String> currentArgument;
 
+
+    /**
+     *
+     * @return All the  arguments that schema supports
+     *         Scalable, can add more
+     */
     private Map<String, AbstractArgumentMarshaler> getSupportedArguments(){
         Map<String, AbstractArgumentMarshaler> supportedArguments = new HashMap<>();
         supportedArguments.put("*", new StringArgumentMarshaler());
@@ -78,57 +84,43 @@ public class Args {
 
     }
 
-    public boolean has(char arg){
+    boolean has(char arg){
         return argsFound.contains(arg);
     }
 
-    public int nextArgument() {
+    int nextArgument() {
         return currentArgument.nextIndex();
     }
 
-
-    private <S, T extends ArgumentMarshaler<S>> S process(Class<S> type, Class<T> marshalerClass, char arg) {
-        ArgumentMarshaler m = marshalers.get(arg);
-
-        if (m != null) {
-            try {
-                marshalerClass.cast(m);
-                return marshalerClass.cast(m).getValue();
-            }
-            catch (ClassCastException e) { }
-        }
-
-        try {
-            return marshalerClass.newInstance().getDefaultValue();
-        }
-        catch (InstantiationException e1) {}
-        catch (IllegalAccessException e1) {}
-        return null;
-    }
-
-    public boolean getBoolean(char arg) {
-        return process(Boolean.class, BooleanArgumentMarshaler.class, arg);
+    boolean getBoolean(char arg) {
+        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
+        return processArg.process(Boolean.class, BooleanArgumentMarshaler.class, arg);
     }
 
 
-    public String getString(char arg) {
-        return process(String.class, StringArgumentMarshaler.class, arg);
+    String getString(char arg) {
+        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
+        return processArg.process(String.class, StringArgumentMarshaler.class, arg);
     }
 
-    public int getInt(char arg) {
-        return process(Integer.class, IntegerArgumentMarshaler.class, arg);
+    int getInt(char arg) {
+        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
+        return processArg.process(Integer.class, IntegerArgumentMarshaler.class, arg);
     }
 
-    public double getDouble(char arg) {
-        return process(Double.class, DoubleArgumentMarshaler.class, arg);
+    double getDouble(char arg) {
+        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
+        return processArg.process(Double.class, DoubleArgumentMarshaler.class, arg);
     }
 
-    public String[] getStringArray(char arg) {
-        return process(String[].class, StringArrayArgumentMarshaler.class, arg);
+    String[] getStringArray(char arg) {
+        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
+        return processArg.process(String[].class, StringArrayArgumentMarshaler.class, arg);
     }
 
-    public Map getMap(char arg) {
-        return process(Map.class, MapArgumentMarshaler.class, arg);
+    Map getMap(char arg) {
+        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
+        return processArg.process(Map.class, MapArgumentMarshaler.class, arg);
     }
 
 
