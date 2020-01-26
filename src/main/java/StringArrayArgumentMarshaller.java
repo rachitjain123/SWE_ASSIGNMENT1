@@ -3,12 +3,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class StringArrayArgumentMarshaler extends AbstractArgumentMarshaler<String[]> {
+public class StringArrayArgumentMarshaller extends AbstractArgumentMarshaller<String[]> {
     private List<String> strings = new ArrayList<>();
 
-    public void set(Iterator<String> cuurentArgument) throws ArgsException {
+    public void set(Iterator<String> currentArgument) throws ArgsException {
         try{
-            strings.add(cuurentArgument.next());
+            strings.add(currentArgument.next());
         }
         catch (NoSuchElementException e){
             throw new ArgsException(ErrorCode.MISSING_STRING);

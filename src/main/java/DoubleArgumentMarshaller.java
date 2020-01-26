@@ -1,13 +1,16 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class DoubleArgumentMarshaler extends AbstractArgumentMarshaler<Double> {
+public class DoubleArgumentMarshaller extends AbstractArgumentMarshaller<Double> {
     private double doubleValue;
 
-    DoubleArgumentMarshaler(){
+    DoubleArgumentMarshaller(){
         doubleValue = 0.0;
     }
 
+    /**
+     * @param currentArgument setting the current iterator value
+     */
     @Override
     public void set(Iterator<String> currentArgument) throws ArgsException {
         String parameter = null;
@@ -26,6 +29,9 @@ public class DoubleArgumentMarshaler extends AbstractArgumentMarshaler<Double> {
         return doubleValue;
     }
 
+    /**
+     * @return default value if DoubleArgumentMarshaller does not contain the element id
+     */
     public Double getDefaultValue() {
         return 0.0;
     }

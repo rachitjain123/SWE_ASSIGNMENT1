@@ -3,16 +3,18 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class MapArgumentMarshaler extends AbstractArgumentMarshaler<Map> {
+public class MapArgumentMarshaller extends AbstractArgumentMarshaller<Map> {
     private Map<String, String> map = new HashMap<>();
 
-    public void set(Iterator<String> cuurentArgument) throws ArgsException {
+    public void set(Iterator<String> currentArgument) throws ArgsException {
         try {
-            String[] mapEntries = cuurentArgument.next().split(",");
+
+            String[] mapEntries = currentArgument.next().split(",");
             for (String entry : mapEntries) {
                 String[] entryComponents = entry.split(":");
-                if (entryComponents.length != 2)
+                if (entryComponents.length != 2) {
                     throw new ArgsException(ErrorCode.MALFORMED_MAP);
+                }
                 map.put(entryComponents[0], entryComponents[1]);
             }
         }

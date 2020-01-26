@@ -1,12 +1,18 @@
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
 
 public class Args {
 
+
     private ListIterator<String> currentArgument;
-    private Map<Character, ArgumentMarshaler> marshalers;
+    private Map<Character, ArgumentMarshaller> marshaller;
     private Set<Character> argsFound;
 
+
+    public Args() {
+    }
 
 
     public Args(String schema, String[] args) throws ArgsException {
@@ -15,12 +21,9 @@ public class Args {
         parser.parseArgumentStrings(Arrays.asList(args));
 
         currentArgument = parser.getCurrentArgument();
-        marshalers = parser.getMarshaller();
+        marshaller = parser.getMarshaller();
         argsFound = parser.getArgsFound();
 
-    }
-
-    public Args() {
     }
 
     boolean hasArgument(char arg){
@@ -32,34 +35,34 @@ public class Args {
     }
 
     boolean getBoolean(char arg) {
-        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
-        return processArg.process(Boolean.class, BooleanArgumentMarshaler.class, arg);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        return processArg.process(BooleanArgumentMarshaller.class, arg);
     }
 
 
     String getString(char arg) {
-        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
-        return processArg.process(String.class, StringArgumentMarshaler.class, arg);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        return processArg.process(StringArgumentMarshaller.class, arg);
     }
 
     int getInt(char arg) {
-        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
-        return processArg.process(Integer.class, IntegerArgumentMarshaler.class, arg);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        return processArg.process(IntegerArgumentMarshaller.class, arg);
     }
 
     double getDouble(char arg) {
-        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
-        return processArg.process(Double.class, DoubleArgumentMarshaler.class, arg);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        return processArg.process(DoubleArgumentMarshaller.class, arg);
     }
 
     String[] getStringArray(char arg) {
-        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
-        return processArg.process(String[].class, StringArrayArgumentMarshaler.class, arg);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        return processArg.process(StringArrayArgumentMarshaller.class, arg);
     }
 
     Map getMap(char arg) {
-        ProcessArgumentMarshaler processArg = new ProcessArgumentMarshaler(marshalers);
-        return processArg.process(Map.class, MapArgumentMarshaler.class, arg);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        return processArg.process(MapArgumentMarshaller.class, arg);
     }
 
 

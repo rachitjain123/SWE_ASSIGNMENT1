@@ -3,27 +3,26 @@ import java.util.*;
 class SchemaParsing extends Args {
 
     private ListIterator<String> currentArgument;
-    private Map<Character, ArgumentMarshaler> marshaller;
+    private Map<Character, ArgumentMarshaller> marshaller;
     private Set<Character> argsFound;
 
-    SchemaParsing() throws ArgsException {
+    SchemaParsing() {
         marshaller = new HashMap<>();
         argsFound = new HashSet<>();
     }
 
     /**
-     *
      * @return All the  arguments that schema supports
      *         Scalable, can add more
      */
-    private Map<String, AbstractArgumentMarshaler> getSupportedArguments(){
-        Map<String, AbstractArgumentMarshaler> supportedArguments = new HashMap<>();
-        supportedArguments.put("*", new StringArgumentMarshaler());
-        supportedArguments.put("#", new IntegerArgumentMarshaler());
-        supportedArguments.put("##", new DoubleArgumentMarshaler());
-        supportedArguments.put("&", new MapArgumentMarshaler());
-        supportedArguments.put("[*]", new StringArrayArgumentMarshaler());
-        supportedArguments.put("!", new BooleanArgumentMarshaler());
+    private Map<String, AbstractArgumentMarshaller> getSupportedArguments(){
+        Map<String, AbstractArgumentMarshaller> supportedArguments = new HashMap<>();
+        supportedArguments.put("*", new StringArgumentMarshaller());
+        supportedArguments.put("#", new IntegerArgumentMarshaller());
+        supportedArguments.put("##", new DoubleArgumentMarshaller());
+        supportedArguments.put("&", new MapArgumentMarshaller());
+        supportedArguments.put("[*]", new StringArrayArgumentMarshaller());
+        supportedArguments.put("!", new BooleanArgumentMarshaller());
         return supportedArguments;
     }
 
@@ -36,7 +35,7 @@ class SchemaParsing extends Args {
     }
 
     private void parseSchemaElement(String element) throws ArgsException {
-        Map<String, AbstractArgumentMarshaler> supportedArguments = getSupportedArguments();
+        Map<String, AbstractArgumentMarshaller> supportedArguments = getSupportedArguments();
         char elementId = element.charAt(0);
         String elementTail = element.substring(1);
         validateSchemaElementId(elementId);
@@ -72,7 +71,7 @@ class SchemaParsing extends Args {
     }
 
     private void parseArgumentCharacter(char argChar) throws ArgsException {
-        ArgumentMarshaler m = marshaller.get(argChar);
+        ArgumentMarshaller m = marshaller.get(argChar);
         if (m == null) {
             throw new ArgsException(ErrorCode.UNEXPECTED_ARGUMENT, argChar,null);
         } else {
@@ -85,7 +84,7 @@ class SchemaParsing extends Args {
         return currentArgument;
     }
 
-    Map<Character, ArgumentMarshaler> getMarshaller() {
+    Map<Character, ArgumentMarshaller> getMarshaller() {
         return marshaller;
     }
 

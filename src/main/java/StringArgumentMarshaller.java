@@ -2,7 +2,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class StringArgumentMarshaler extends AbstractArgumentMarshaler<String> {
+public class StringArgumentMarshaller extends AbstractArgumentMarshaller<String> {
     private String stringValue;
 
     public void set(Iterator<String> cuurentArgument) throws ArgsException {

@@ -2,15 +2,18 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class IntegerArgumentMarshaler extends AbstractArgumentMarshaler<Integer> {
+public class IntegerArgumentMarshaller extends AbstractArgumentMarshaller<Integer> {
 
     private int intValue;
 
+    /**
+     * @param currentArgument setting the current iterator value
+     */
     @Override
-    public void set(Iterator<String> cuurentArgument) throws ArgsException {
+    public void set(Iterator<String> currentArgument) throws ArgsException {
         String parameter = null;
         try{
-            parameter = cuurentArgument.next();
+            parameter = currentArgument.next();
             intValue = Integer.parseInt(parameter);
         }
         catch (NoSuchElementException e) {
@@ -24,6 +27,9 @@ public class IntegerArgumentMarshaler extends AbstractArgumentMarshaler<Integer>
         return intValue;
     }
 
+    /**
+     * @return default value if IntegerArgumentMarshaller does not contain the element id
+     */
     public Integer getDefaultValue(){
         return 0;
     }

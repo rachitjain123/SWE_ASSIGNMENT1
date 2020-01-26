@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Map;
 
 public class ArgsException extends Exception {
@@ -37,12 +36,16 @@ public class ArgsException extends Exception {
         return this.errorCode;
     }
 
+    /**
+     * @return message string of the corresponding errorCode
+     */
     String errorMessage() {
         ErrorMessage errorMessage = new ErrorMessage(errorArgumentId, errorParameter);
-        Map<ErrorCode, String> codeStringMap = errorMessage.getErrorMessages();
-        if(!codeStringMap.containsKey(errorCode))
+        Map<ErrorCode, String> errorCodeMessageMap = errorMessage.getErrorMessages();
+
+        if(!errorCodeMessageMap.containsKey(errorCode))
             throw new IllegalStateException("Unexpected value: " + errorCode);
-        return codeStringMap.get(errorCode);
+        return errorCodeMessageMap.get(errorCode);
 
     }
 }
