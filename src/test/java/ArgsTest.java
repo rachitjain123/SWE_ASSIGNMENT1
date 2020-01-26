@@ -70,7 +70,7 @@ public class ArgsTest {
     @Test
     public void testSimpleStringPresent() throws Exception {
         Args args = new Args("x*", new String[]{"-x", "param"});
-        assertTrue(args.has('x'));
+        assertTrue(args.hasArgument('x'));
         assertEquals("param", args.getString('x'));
         assertEquals(2, args.nextArgument());
     }
@@ -88,15 +88,15 @@ public class ArgsTest {
     @Test
     public void testSpacesInFormat() throws Exception {
         Args args = new Args("x, y", new String[]{"-xy"});
-        assertTrue(args.has('x'));
-        assertTrue(args.has('y'));
+        assertTrue(args.hasArgument('x'));
+        assertTrue(args.hasArgument('y'));
         assertEquals(1, args.nextArgument());
     }
 
     @Test
     public void testSimpleIntPresent() throws Exception {
         Args args = new Args("x#", new String[]{"-x", "42"});
-        assertTrue(args.has('x'));
+        assertTrue(args.hasArgument('x'));
         assertEquals(42, args.getInt('x'));
         assertEquals(2, args.nextArgument());
     }
@@ -126,7 +126,7 @@ public class ArgsTest {
     @Test
     public void testSimpleDoublePresent() throws Exception {
         Args args = new Args("x##", new String[]{"-x", "42.3"});
-        assertTrue(args.has('x'));
+        assertTrue(args.hasArgument('x'));
         assertEquals(42.3, args.getDouble('x'), .001);
     }
 
@@ -154,7 +154,7 @@ public class ArgsTest {
     @Test
     public void testStringArray() throws Exception {
         Args args = new Args("x[*]", new String[]{"-x", "alpha"});
-        assertTrue(args.has('x'));
+        assertTrue(args.hasArgument('x'));
         String[] result = args.getStringArray('x');
 
         assertEquals(1, result.length);
@@ -174,7 +174,7 @@ public class ArgsTest {
     @Test
     public void manyStringArrayElements() throws Exception {
         Args args = new Args("x[*]", new String[]{"-x", "alpha", "-x", "beta", "-x", "gamma"});
-        assertTrue(args.has('x'));
+        assertTrue(args.hasArgument('x'));
         String[] result = args.getStringArray('x');
         assertEquals(3, result.length);
         assertEquals("alpha", result[0]);
@@ -185,7 +185,7 @@ public class ArgsTest {
     @Test
     public void MapArgument() throws Exception {
         Args args = new Args("f&", new String[] {"-f", "key1:val1,key2:val2"});
-        assertTrue(args.has('f'));
+        assertTrue(args.hasArgument('f'));
         Map map = args.getMap('f');
         assertEquals("val1", map.get("key1"));
         assertEquals("val2", map.get("key2"));
@@ -199,7 +199,7 @@ public class ArgsTest {
     @Test
     public void oneMapArgument() throws Exception {
         Args args = new Args("f&", new String[] {"-f", "key1:val1"});
-        assertTrue(args.has('f'));
+        assertTrue(args.hasArgument('f'));
         Map map = args.getMap('f');
         assertEquals("val1", map.get("key1"));
     }
@@ -215,8 +215,8 @@ public class ArgsTest {
     @Test
     public void testExtraArgumentsThatLookLikeFlags() throws Exception {
         Args args = new Args("x,y", new String[]{"-x", "alpha", "-y", "beta"});
-        assertTrue(args.has('x'));
-        assertFalse(args.has('y'));
+        assertTrue(args.hasArgument('x'));
+        assertFalse(args.hasArgument('y'));
         assertTrue(args.getBoolean('x'));
         assertFalse(args.getBoolean('y'));
         assertEquals(1, args.nextArgument());
