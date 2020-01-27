@@ -7,8 +7,8 @@ public class Args {
 
 
     private ListIterator<String> currentArgument;
-    private Map<Character, ArgumentMarshaller> marshaller;
     private Set<Character> argsFound;
+    private ImmutableMap<Character, ArgumentMarshaller> immutableMarshaller;
 
     public Args() {
     }
@@ -22,11 +22,10 @@ public class Args {
 
         SchemaParser schemaParser = new SchemaParser();
         schemaParser.parseSchema(schema);
-        marshaller = schemaParser.getMarshaller();
+        Map<Character, ArgumentMarshaller> marshaller = schemaParser.getMarshaller();
 
         /* Converting Immutable Map */
-        ImmutableMap<Character, ArgumentMarshaller> immutableMarshaller=
-            ImmutableMap.<Character, ArgumentMarshaller>builder().putAll(marshaller).build();
+        immutableMarshaller = ImmutableMap.<Character, ArgumentMarshaller>builder().putAll(marshaller).build();
 
         ArgumentParser argumentParser = new ArgumentParser(immutableMarshaller);
         argumentParser.parseArgumentStringArray(argList);
@@ -44,32 +43,32 @@ public class Args {
     }
 
     boolean getBoolean(char arg) throws ArgsException {
-        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(immutableMarshaller);
         return processArg.process(BooleanArgumentMarshaller.class, arg);
     }
 
     String getString(char arg) throws ArgsException {
-        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(immutableMarshaller);
         return processArg.process(StringArgumentMarshaller.class, arg);
     }
 
     int getInt(char arg) throws ArgsException {
-        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(immutableMarshaller);
         return processArg.process(IntegerArgumentMarshaller.class, arg);
     }
 
     double getDouble(char arg) throws ArgsException {
-        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(immutableMarshaller);
         return processArg.process(DoubleArgumentMarshaller.class, arg);
     }
 
     String[] getStringArray(char arg) throws ArgsException {
-        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(immutableMarshaller);
         return processArg.process(StringArrayArgumentMarshaller.class, arg);
     }
 
     Map getMap(char arg) throws ArgsException {
-        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(marshaller);
+        ProcessArgumentMarshaller processArg = new ProcessArgumentMarshaller(immutableMarshaller);
         return processArg.process(MapArgumentMarshaller.class, arg);
     }
 

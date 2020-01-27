@@ -14,7 +14,7 @@ class ArgumentParser {
 
     private void parseArgumentCharacter(char argChar) throws ArgsException {
         if (!marshaller.containsKey(argChar)) {
-            throw new ArgsException(ErrorCode.UNEXPECTED_ARGUMENT, argChar, null);
+            throw new ArgsException(ErrorCode.UNEXPECTED_ARGUMENT, argChar);
         } else {
             ArgumentMarshaller argumentMarshaller = marshaller.get(argChar);
             argsFound.add(argChar);

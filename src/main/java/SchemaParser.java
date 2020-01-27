@@ -14,7 +14,7 @@ class SchemaParser {
 
     private void validateSchemaElementId(char elementId) throws ArgsException {
         if (!Character.isLetter(elementId))
-            throw new ArgsException(ErrorCode.INVALID_ARGUMENT_NAME, elementId, null);
+            throw new ArgsException(ErrorCode.INVALID_ARGUMENT_NAME, elementId);
     }
 
     private void parseSchemaElement(String element) throws ArgsException {

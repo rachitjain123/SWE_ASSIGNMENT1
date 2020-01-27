@@ -5,9 +5,6 @@ public class ArgsException extends Exception {
     private String errorParameter = null;
     private ErrorCode errorCode = ErrorCode.OK;
 
-    public ArgsException() {
-    }
-
     public ArgsException(String message) {
         super(message);
     }
@@ -19,6 +16,11 @@ public class ArgsException extends Exception {
     public ArgsException(ErrorCode errorCode, String errorParameter) {
         this.errorCode = errorCode;
         this.errorParameter = errorParameter;
+    }
+
+    public ArgsException(ErrorCode errorCode, char errorArgumentId) {
+        this.errorCode = errorCode;
+        this.errorArgumentId = errorArgumentId;
     }
 
     public ArgsException(ErrorCode errorCode, char errorArgumentId, String errorParameter) {
