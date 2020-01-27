@@ -36,6 +36,17 @@ New IntegerArgumentMarshaler Class
 - Its bad habit to import static classes
 - Previously, ```import static com.cleancoder.args.ArgsException.ErrorCode.*; ``` was there, I made a new class ErrorCode.
 - Better maintenance of code
+```
+public enum ErrorCode {
+
+    ILLEGAL_ACCESS, INVALID_ARGUMENT_FORMAT, INVALID_ARGUMENT_NAME, INVALID_CAST,
+    INVALID_DOUBLE,
+    INVALID_INSTANTIATION, INVALID_INTEGER,
+    MALFORMED_MAP, MISSING_DOUBLE, MISSING_INTEGER, MISSING_MAP, MISSING_STRING,
+    OK, UNEXPECTED_ARGUMENT
+}
+
+```
 
 ### Used map instead of switch cases and too many if else
 - Earlier for parsing schema, to check all the supported arguments("&", "#", etc.) , if else was used which was very hard to scale
@@ -110,6 +121,18 @@ New IntegerArgumentMarshaler Class
 ### One assert per test, one concept per test
 - All the unit tests are changed such that they have only one assertion per test and testing only one concept
 - Refactored schema related tests into new file *ArgsSchemaTest.java*
+```
+
+    @Test
+    public void testNonLetterSchemaErrorArgument() {
+        try {
+            new Args("*", new String[]{});
+            fail("Args constructor should have thrown exception");
+        } catch (ArgsException e) {
+            assertEquals('*', e.getErrorArgumentId());
+        }
+    }
+```
 
 ### New Idea: EqualsBuilder.java
 - This class tells the reason of assertion even when the asserions are anded. It tells based on the message parameter that is passed 
@@ -134,7 +157,7 @@ EqualsBuilder equalsBuilder = new EqualsBuilder()
                 .and(args.hasArgument('y'), true, "Has argument")
                 .and(42, args.getInt('y'),"Argument Parameter y");
         assertTrue(equalsBuilder.getMessage(), equalsBuilder.result());
-        
+
 If the above fails, it displays expected value, actual value and the message
 ```
 
@@ -187,6 +210,26 @@ If the above fails, it displays expected value, actual value and the message
 ### Usage of Maven
 - Maven is better for managing dependencies than ANT and is better for controlling of build processes
 - Look at *pom.xml* for information about the project and the dependencies
+```
+    <groupId>com.cleancoder</groupId>
+    <artifactId>args</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    Sample code part of Pom file 
+```
 
 ## Code Base Characterstics
 - Modularity
