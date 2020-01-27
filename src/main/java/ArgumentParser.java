@@ -27,6 +27,9 @@ class ArgumentParser {
             parseArgumentCharacter(argChars.charAt(i));
     }
 
+    /**
+     * @param argsList The List is immutable which is passed in Args.java
+     */
     void parseArgumentStringArray(List<String> argsList) throws ArgsException {
         currentArgument = argsList.listIterator();
         while (currentArgument.hasNext()) {

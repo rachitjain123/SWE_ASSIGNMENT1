@@ -129,6 +129,7 @@ If the above fails, it displays expected value, actual value and the message
 
 ### Code Style
 - Proper indentation, brackets, line space was maintained uniformly across all files
+- All null parameters are avoided
 
 ### Documentation
 - Proper documentation with JavaDocs wherever required.
@@ -151,6 +152,7 @@ If the above fails, it displays expected value, actual value and the message
 - Documentation of code
 - Proper Naming of methods and classes
 - Followed OOPS principles
+- Avoided Null Values
 
 ## Requirements
 - Maven 3.6.1 or later
