@@ -135,6 +135,20 @@ If the above fails, it displays expected value, actual value and the message
 - Proper documentation with JavaDocs wherever required.
 - Comments are not added everywhere, tried to explain through code only
 
+### Single Level Abstraction
+- Tried to follow SLA principle in all methods
+```
+    private void parseSchemaElement(String element) throws ArgsException {
+        SupportedArguments supportedArguments = new SupportedArguments();
+        allSupportedArguments = supportedArguments.getSupportedArguments();
+        char elementId = element.charAt(0);
+        String elementTail = element.substring(1);
+        validateSchemaElementId(elementId);
+        putIntoMarshaller(elementTail, elementId);
+    }
+    Code from SchemaParser.java
+```
+
 ### Usage of Maven
 - Maven is better for managing dependencies than ANT and is better for controlling of build processes
 - Look at *pom.xml* for information about the project and the dependencies
@@ -150,9 +164,10 @@ If the above fails, it displays expected value, actual value and the message
 - Single responsibility of every class
 - No duplicacy of code
 - Documentation of code
+- Smaller Functions
 - Proper Naming of methods and classes
 - Followed OOPS principles
-- Avoided Null Values
+- Avoided Passing and Returning Null Values
 
 ## Requirements
 - Maven 3.6.1 or later
