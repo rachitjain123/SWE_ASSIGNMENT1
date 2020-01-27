@@ -82,6 +82,19 @@ New IntegerArgumentMarshaler Class
 ### Three more ErrorCodes
 - *INVALID_CAST*, *ILLEGAL_ACCESS* and *INVALID_INSTANTIATION* for *ProcessArgumentMarshaler.java*
 - Tests are written for same.
+```
+    @Test
+    public void testInvalidCast() {
+        try {
+            Args args = new Args("x#", new String[]{"-x", "42"});
+            args.getBoolean('x');
+            fail();
+        } catch (ArgsException e) {
+            assertEquals(ErrorCode.INVALID_CAST, e.getErrorCode());
+        }
+    }
+    Test for InvalidCast
+```
 
 ### Arguments are Immutable
 - All methods arguments are immutables
@@ -121,6 +134,7 @@ EqualsBuilder equalsBuilder = new EqualsBuilder()
                 .and(args.hasArgument('y'), true, "Has argument")
                 .and(42, args.getInt('y'),"Argument Parameter y");
         assertTrue(equalsBuilder.getMessage(), equalsBuilder.result());
+        
 If the above fails, it displays expected value, actual value and the message
 ```
 
@@ -134,6 +148,27 @@ If the above fails, it displays expected value, actual value and the message
 ### Documentation
 - Proper documentation with JavaDocs wherever required.
 - Comments are not added everywhere, tried to explain through code only
+- Sample Documentation of *ProcessArgumentMarshaller.java*
+```
+    /**
+     * @param marshallerClass Type of class ArgumentMarsheller
+     * @param arg             argument id
+     * @param <S>             type parameter
+     * @param <T>             type parameter
+     * @return casted output of marshallerClass to the type parameter if arg present
+     * else returns default value of marshaller class
+     */
+    <S, T extends ArgumentMarshaller<S>> S process(Class<T> marshallerClass, char arg) throws ArgsException {
+        if (marshaller.containsKey(arg)) {
+            try {
+                marshallerClass.cast(marshaller.get(arg));
+                return marshallerClass.cast(marshaller.get(arg)).getValue();
+            } catch (ClassCastException e) {
+                throw new ArgsException(ErrorCode.INVALID_CAST);
+            }
+        }
+
+```
 
 ### Single Level Abstraction
 - Tried to follow SLA principle in all methods
