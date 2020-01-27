@@ -11,7 +11,7 @@ public class BooleanArgumentMarshaller extends AbstractArgumentMarshaller<Boolea
      * @param currentArgument setting the current iterator value
      */
     @Override
-    public void set(Iterator<String> currentArgument) {
+    public void setValue(Iterator<String> currentArgument) {
         booleanValue = true;
     }
 

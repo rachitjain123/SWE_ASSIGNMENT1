@@ -18,7 +18,7 @@ class ArgumentParser {
         } else {
             ArgumentMarshaller argumentMarshaller = marshaller.get(argChar);
             argsFound.add(argChar);
-            argumentMarshaller.set(currentArgument);
+            argumentMarshaller.setValue(currentArgument);
         }
     }
 

@@ -4,14 +4,14 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class MapArgumentMarshaller extends AbstractArgumentMarshaller<Map> {
-    private Map<String, String> map = new HashMap<>();
+    private Map<String, String> stringHashMap = new HashMap<>();
 
-    public void set(Iterator<String> currentArgument) throws ArgsException {
+    public void setValue(Iterator<String> currentArgument) throws ArgsException {
         try {
             String[] mapEntries = currentArgument.next().split(",");
             for (String entry : mapEntries) {
                 String[] entryComponents = validateEntry(entry);
-                map.put(entryComponents[0], entryComponents[1]);
+                stringHashMap.put(entryComponents[0], entryComponents[1]);
             }
         } catch (NoSuchElementException e) {
             throw new ArgsException(ErrorCode.MISSING_MAP);
@@ -31,7 +31,7 @@ public class MapArgumentMarshaller extends AbstractArgumentMarshaller<Map> {
     }
 
     public Map<String, String> getValue() {
-        return map;
+        return stringHashMap;
     }
 
     /**

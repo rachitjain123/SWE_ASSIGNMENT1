@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 public class StringArgumentMarshaller extends AbstractArgumentMarshaller<String> {
     private String stringValue;
 
-    public void set(Iterator<String> currentArgument) throws ArgsException {
+    public void setValue(Iterator<String> currentArgument) throws ArgsException {
         try {
             stringValue = currentArgument.next();
         } catch (NoSuchElementException e) {

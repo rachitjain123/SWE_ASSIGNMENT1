@@ -6,7 +6,7 @@ import java.util.Iterator;
  */
 public interface ArgumentMarshaller<T> {
 
-    void set(Iterator<String> currentArgument) throws ArgsException;
+    void setValue(Iterator<String> currentArgument) throws ArgsException;
 
     T getValue();
 

@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class StringArrayArgumentMarshaller extends AbstractArgumentMarshaller<String[]> {
     private List<String> stringArrayList = new ArrayList<>();
 
-    public void set(Iterator<String> currentArgument) throws ArgsException {
+    public void setValue(Iterator<String> currentArgument) throws ArgsException {
         try {
             stringArrayList.add(currentArgument.next());
         } catch (NoSuchElementException e) {

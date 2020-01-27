@@ -9,7 +9,7 @@ public class IntegerArgumentMarshaller extends AbstractArgumentMarshaller<Intege
      * @param currentArgument setting the current iterator value
      */
     @Override
-    public void set(Iterator<String> currentArgument) throws ArgsException {
+    public void setValue(Iterator<String> currentArgument) throws ArgsException {
         String parameter = null;
         try {
             parameter = currentArgument.next();

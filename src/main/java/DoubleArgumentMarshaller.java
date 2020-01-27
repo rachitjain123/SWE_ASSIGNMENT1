@@ -5,14 +5,13 @@ public class DoubleArgumentMarshaller extends AbstractArgumentMarshaller<Double>
     private double doubleValue;
 
     DoubleArgumentMarshaller() {
-        doubleValue = 0.0;
     }
 
     /**
      * @param currentArgument setting the current iterator value
      */
     @Override
-    public void set(Iterator<String> currentArgument) throws ArgsException {
+    public void setValue(Iterator<String> currentArgument) throws ArgsException {
         String parameter = null;
         try {
             parameter = currentArgument.next();

@@ -5,57 +5,7 @@ import static org.junit.Assert.*;
 
 public class ArgsTest {
 
-    @Test
-    public void testCreateWithNoSchemaOrArguments() throws Exception {
-        Args args = new Args("", new String[0]);
-        assertEquals(0, args.nextArgument());
-    }
 
-
-    @Test
-    public void testWithNoSchemaButWithOneArgument() {
-        try {
-            new Args("", new String[]{"-x"});
-            fail();
-        } catch (ArgsException e) {
-            assertEquals(ErrorCode.UNEXPECTED_ARGUMENT, e.getErrorCode());
-            assertEquals('x', e.getErrorArgumentId());
-        }
-    }
-
-    @Test
-    public void testWithNoSchemaButWithMultipleArguments() {
-        try {
-            new Args("", new String[]{"-x", "-y"});
-            fail();
-        } catch (ArgsException e) {
-            assertEquals(ErrorCode.UNEXPECTED_ARGUMENT, e.getErrorCode());
-            assertEquals('x', e.getErrorArgumentId());
-        }
-
-    }
-
-    @Test
-    public void testNonLetterSchema() {
-        try {
-            new Args("*", new String[]{});
-            fail("Args constructor should have thrown exception");
-        } catch (ArgsException e) {
-            assertEquals(ErrorCode.INVALID_ARGUMENT_NAME, e.getErrorCode());
-            assertEquals('*', e.getErrorArgumentId());
-        }
-    }
-
-    @Test
-    public void testInvalidArgumentFormat() {
-        try {
-            new Args("f~", new String[]{});
-            fail("Args constructor should have throws exception");
-        } catch (ArgsException e) {
-            assertEquals(ErrorCode.INVALID_ARGUMENT_FORMAT, e.getErrorCode());
-            assertEquals('f', e.getErrorArgumentId());
-        }
-    }
 
     @Test
     public void testSimpleBooleanPresent() throws Exception {
