@@ -80,7 +80,8 @@ New IntegerArgumentMarshaler Class
 - Refactored ArgsException into *ErrorMesage.java* where *ErrorMessage.java* has all the error messages and from *ArgsException.java* we get the error message
 
 ### Three more ErrorCodes
-- *ILLEGAL_ACCESS* *INVALID_CAST* *INVALID_INSTANTIATION* for *ProcessArgumentMarshaler.java*
+- *INVALID_CAST*, *ILLEGAL_ACCESS* and *INVALID_INSTANTIATION* for *ProcessArgumentMarshaler.java*
+- Tests are written for same.
 
 ### Arguments are Immutable
 - All methods arguments are immutables
