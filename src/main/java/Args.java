@@ -1,6 +1,7 @@
 import java.util.*;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 public class Args {
 
@@ -23,7 +24,11 @@ public class Args {
         schemaParser.parseSchema(schema);
         marshaller = schemaParser.getMarshaller();
 
-        ArgumentParser argumentParser = new ArgumentParser(marshaller);
+        /* Converting Immutable Map */
+        ImmutableMap<Character, ArgumentMarshaller> immutableMarshaller=
+            ImmutableMap.<Character, ArgumentMarshaller>builder().putAll(marshaller).build();
+
+        ArgumentParser argumentParser = new ArgumentParser(immutableMarshaller);
         argumentParser.parseArgumentStringArray(argList);
         currentArgument = argumentParser.getCurrentArgument();
         argsFound = argumentParser.getArgsFound();
