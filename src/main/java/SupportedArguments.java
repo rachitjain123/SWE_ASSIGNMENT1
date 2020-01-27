@@ -13,7 +13,6 @@ class SupportedArguments {
         supportedArguments.put("##", new DoubleArgumentMarshaller());
         supportedArguments.put("&", new MapArgumentMarshaller());
         supportedArguments.put("[*]", new StringArrayArgumentMarshaller());
-        supportedArguments.put("!", new BooleanArgumentMarshaller());
         return supportedArguments;
     }
 }

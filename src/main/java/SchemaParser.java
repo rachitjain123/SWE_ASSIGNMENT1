@@ -24,7 +24,7 @@ class SchemaParser {
         String elementTail = element.substring(1);
         validateSchemaElementId(elementId);
         if (elementTail.isEmpty())
-            marshaller.put(elementId, allSupportedArguments.get("!"));
+            marshaller.put(elementId, new BooleanArgumentMarshaller());
         else if (allSupportedArguments.containsKey(elementTail))
             marshaller.put(elementId, allSupportedArguments.get(elementTail));
         else
